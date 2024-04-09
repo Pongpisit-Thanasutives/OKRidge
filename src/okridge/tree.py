@@ -78,6 +78,7 @@ class BNBTree:
         max_memory_GB=300,
         useBruteForce=False,
         tighten_bound_via_ADMM=True,
+        verbose=False,
     ):
         """Initialize the BnBTree class with the data and parameters
 
@@ -111,14 +112,14 @@ class BNBTree:
         self.root = None
 
         available_memory_GB = get_RAM_available_in_GB()
-        if max_memory_GB is None:
+        if max_memory_GB is None and verbose:
             print(
                 "No max_memory_GB is given. Using all available memory ({} GB) in the machine".format(
                     available_memory_GB
                 )
             )
             self.max_memory_GB = available_memory_GB
-        elif max_memory_GB > available_memory_GB:
+        elif max_memory_GB > available_memory_GB and verbose:
             print(
                 "max_memory_GB is larger than available memory. Using all available memory ({} GB) in the machine".format(
                     available_memory_GB
@@ -126,7 +127,7 @@ class BNBTree:
             )
             self.max_memory_GB = available_memory_GB
         else:
-            print("Using max memory ({} GB)".format(max_memory_GB))
+            # print("Using max memory ({} GB)".format(max_memory_GB))
             self.max_memory_GB = max_memory_GB
         self.safe_max_memory_GB = 0.95 * self.max_memory_GB
         self.RAM_used_GB_start = get_RAM_used_in_GB()
@@ -217,13 +218,13 @@ class BNBTree:
 
         RAM_used_GB_since_start = self.get_RAM_used_since_start()
 
-        print(
-            f"'l' -> level(depth) of BnB tree, ",
-            f"'d' -> best dual bound, ",
-            f"'u' -> best upper(primal) bound, ",
-            f"'g' -> optimiality gap, ",
-            f"'t' -> time"
-        )
+#        print(
+#            f"'l' -> level(depth) of BnB tree, ",
+#            f"'d' -> best dual bound, ",
+#            f"'u' -> best upper(primal) bound, ",
+#            f"'g' -> optimiality gap, ",
+#            f"'t' -> time"
+#        )
 
         # keep searching through the queue if the queue is not empty AND time limit is not reached
         while (
