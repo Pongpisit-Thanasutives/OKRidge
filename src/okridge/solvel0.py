@@ -1,7 +1,9 @@
 import numpy as np
+from numba import njit
 from tqdm import trange
 from .tree import BNBTree
 
+@njit
 def okridge_solvel0(X, y, k, lambda2=1e-5, gap_tol=1e-4, useBruteForce=True, time_limit=120, verbose=False):
     BnB_optimizer = BNBTree(X=X, y=y.flatten(), lambda2=lambda2, useBruteForce=useBruteForce, verbose=verbose)
     _, beta, _, _, _ = BnB_optimizer.solve(k=int(k), gap_tol=gap_tol, verbose=verbose, time_limit=time_limit)
