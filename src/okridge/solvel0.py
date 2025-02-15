@@ -4,6 +4,7 @@ from sklearn.preprocessing import normalize
 from .tree import BNBTree
 
 def okridge_solvel0(X, y, k, lambda2=1e-5, gap_tol=1e-4, norm=None, useBruteForce=True, time_limit=180, verbose=False):
+    k = min(k, X.shape[-1])
     if norm is not None:
         X, norms = normalize(X, norm=norm, axis=0, return_norm=True)
     BnB_optimizer = BNBTree(X=X, y=y.flatten(), lambda2=lambda2, useBruteForce=useBruteForce, verbose=verbose)
@@ -13,6 +14,7 @@ def okridge_solvel0(X, y, k, lambda2=1e-5, gap_tol=1e-4, norm=None, useBruteForc
     return beta, nonz_indices
 
 def okridge_solvel0_full(X, y, k, lambda2=1e-5, gap_tol=1e-4, norm=None, useBruteForce=True, time_limit=180, verbose=False):
+    k = min(k, X.shape[-1])
     if norm is not None:
         X, norms = normalize(X, norm=norm, axis=0, return_norm=True)
     BnB_optimizer = BNBTree(X=X, y=y.flatten(), lambda2=lambda2, useBruteForce=useBruteForce, verbose=verbose)
