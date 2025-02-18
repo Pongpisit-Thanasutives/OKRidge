@@ -14,7 +14,7 @@ def okridge_solvel0(X, y, k=sys.maxsize, lambda2=1e-5, gap_tol=1e-4, norm=None, 
     beta = beta/norms if norms is not None else beta
     return beta, nonz_indices
 
-def okridge_solvel0_full(X, y, kk=sys.maxsize, lambda2=1e-5, gap_tol=1e-4, norm=None, useBruteForce=True, time_limit=180, verbose=False):
+def okridge_solvel0_full(X, y, k=sys.maxsize, lambda2=1e-5, gap_tol=1e-4, norm=None, useBruteForce=True, time_limit=180, verbose=False):
     k = min(k, X.shape[-1])
     if norm is not None:
         X, norms = normalize(X, norm=norm, axis=0, return_norm=True)
